@@ -1,15 +1,16 @@
 <?php
 
-namespace Html2Text;
+namespace ThreeHeartsDigital\Tests;
 
 use PHPUnit\Framework\TestCase;
+use ThreeHeartsDigital\HtmlToPlaintextConversionService;
 
 class PreTest extends TestCase
 {
-    public function preDataProvider()
+    public static function preDataProvider(): array
     {
-        return array(
-            'Basic pre' => array(
+        return [
+            'Basic pre' => [
                 'html' => <<<EOT
 <p>Before</p>
 <pre>
@@ -34,8 +35,8 @@ After
 
 EOT
                 ,
-            ),
-            'br in pre' => array(
+            ],
+            'br in pre' => [
                 'html' => <<<EOT
 <pre>
 some<br />  indented<br />  text<br />    on<br />    several<br />  lines<br />
@@ -53,8 +54,8 @@ some
 
 EOT
                 ,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -62,7 +63,7 @@ EOT
      */
     public function testPre($html, $expected)
     {
-        $html2text = new Html2Text($html);
-        $this->assertEquals($expected, $html2text->getText());
+        $service = new HtmlToPlaintextConversionService();
+        $this->assertEquals($expected, $service->setHtml($html)->getPlainText());
     }
 }

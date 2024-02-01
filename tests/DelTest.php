@@ -1,8 +1,9 @@
 <?php
 
-namespace Html2Text;
+namespace ThreeHeartsDigital\Tests;
 
 use PHPUnit\Framework\TestCase;
+use ThreeHeartsDigital\HtmlToPlaintextConversionService;
 
 class DelTest extends TestCase
 {
@@ -11,7 +12,7 @@ class DelTest extends TestCase
         $html = 'My <del>Résumé</del> Curriculum Vitæ';
         $expected = 'My R̶é̶s̶u̶m̶é̶ Curriculum Vitæ';
 
-        $html2text = new Html2Text($html);
-        $this->assertEquals($expected, $html2text->getText());
+        $service = new HtmlToPlaintextConversionService();
+        $this->assertEquals($expected, $service->setHtml($html)->getPlainText());
     }
 }

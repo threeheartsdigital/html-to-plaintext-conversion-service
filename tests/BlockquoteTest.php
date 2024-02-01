@@ -1,15 +1,16 @@
 <?php
 
-namespace Html2Text;
+namespace ThreeHeartsDigital\Tests;
 
 use PHPUnit\Framework\TestCase;
+use ThreeHeartsDigital\HtmlToPlaintextConversionService;
 
 class BlockquoteTest extends TestCase
 {
-    public function blockquoteDataProvider()
+    public static function blockquoteDataProvider(): array
     {
-        return array(
-            'Basic blockquote' => array(
+        return [
+            'Basic blockquote' => [
                 'html' => <<<EOT
 <p>Before</p>
 <blockquote>
@@ -32,8 +33,8 @@ After
 
 EOT
                 ,
-            ),
-            'Multiple blockquotes in text' => array(
+            ],
+            'Multiple blockquotes in text' => [
                 'html' => <<<EOF
 <p>Highlights from today&rsquo;s <strong>Newlyhired Game</strong>:</p><blockquote><p><strong>Sean:</strong> What came first, Blake&rsquo;s first <em>Chief Architect position</em> or Blake&rsquo;s first <em>girlfriend</em>?</p> </blockquote> <blockquote> <p><strong>Sean:</strong> Devin, Bryan spent almost five years of his life slaving away for this vampire squid wrapped around the face of humanity&hellip;<br/><strong>Devin:</strong> Goldman Sachs?<br/><strong>Sean:</strong> Correct!</p> </blockquote> <blockquote> <p><strong>Sean:</strong> What was the name of the girl Zhu took to prom three months ago?<br/><strong>John:</strong> What?<br/><strong>Derek (from the audience):</strong> Destiny!<br/><strong>Zhu:</strong> Her name is Jolene. She&rsquo;s nice. I like her.</p></blockquote><p>I think the audience is winning.&nbsp; - Derek</p>
 EOF
@@ -58,8 +59,8 @@ Highlights from today’s NEWLYHIRED GAME:
 I think the audience is winning.  - Derek
 
 EOF
-            ),
-            'Multibyte strings before blockquote' => array(
+            ],
+            'Multibyte strings before blockquote' => [
                 'html' => <<<EOF
 “Hello”
 
@@ -73,15 +74,16 @@ EOF
 > goodbye
 
 EOF
-            )
-        );
+            ],
+        ];
     }
 
     /**
      * @dataProvider blockquoteDataProvider
      */
-    public function testBlockquote($html, $expected) {
-        $html2text = new Html2Text($html);
-        $this->assertEquals($expected, $html2text->getText());
+    public function testBlockquote($html, $expected)
+    {
+        $service = new HtmlToPlaintextConversionService();
+        $this->assertEquals($expected, $service->setHtml($html)->getPlainText());
     }
 }

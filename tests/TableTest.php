@@ -1,14 +1,15 @@
 <?php
 
-namespace Html2Text;
+namespace ThreeHeartsDigital\Tests;
 
 use PHPUnit\Framework\TestCase;
+use ThreeHeartsDigital\HtmlToPlaintextConversionService;
 
 class TableTest extends TestCase
 {
     public function testTable()
     {
-        $html =<<<'EOT'
+        $html = <<< EOT
 <table>
   <tr>
     <th>Heading 1</th>
@@ -21,7 +22,7 @@ class TableTest extends TestCase
 </table>
 EOT;
 
-        $expected =<<<'EOT'
+        $expected = <<< EOT
  		HEADING 1
  		Data 1
 
@@ -31,7 +32,7 @@ EOT;
 
 EOT;
 
-        $html2text = new Html2Text($html);
-        $this->assertEquals($expected, $html2text->getText());
+        $service = new HtmlToPlaintextConversionService();
+        $this->assertEquals($expected, $service->setHtml($html)->getPlainText());
     }
 }
