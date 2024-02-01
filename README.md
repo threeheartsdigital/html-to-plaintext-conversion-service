@@ -6,9 +6,9 @@ A PHP library for converting HTML to formatted plain text.
 ## Basic Usage
 
 ```php
-$html = new \Html2Text\HtmlToPlaintextConversionService('Hello, &quot;<b>world</b>&quot;');
+$html = (new \ThreeHeartsDigital\HtmlToPlaintextConversionService())->setHtml('Hello, &quot;<b>world</b>&quot;');
 
-echo $html->getText();  // Hello, "WORLD"
+echo $html->getPlainText();  // Hello, "WORLD"
 ```
 
 ## History
