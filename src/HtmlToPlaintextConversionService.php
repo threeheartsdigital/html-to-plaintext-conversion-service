@@ -122,7 +122,7 @@ class HtmlToPlaintextConversionService
         '/<(strong)( [^>]*)?>(.*?)<\/strong>/i',                 // <strong>
         '/<(del)( [^>]*)?>(.*?)<\/del>/i',                       // <del>
         '/<(th)( [^>]*)?>(.*?)<\/th>/i',                         // <th> and </th>
-        '/<(a) [^>]*href=("|\')([^"\']+)\2([^>]*)>(.*?)<\/a>/i', // <a href="">
+        '/<(a) [^>]*href=("|\')([^"\']+)\2([^>]*)>(.*?)<\/a>/si', // <a href="">
     ];
 
     /**
