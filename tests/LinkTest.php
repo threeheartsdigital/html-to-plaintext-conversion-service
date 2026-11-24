@@ -34,6 +34,24 @@ EOT;
         $this->assertEquals($expected, $service->setHtml(self::HTML)->getPlainText());
     }
 
+    public function testAnchorContainingBrPreservesHref()
+    {
+        $html = '<a href="https://example.com/action"><span>Click here</span><br><span>Some description</span></a>';
+
+        $expected = <<<EOT
+Click here
+Some description [1]
+
+Links:
+------
+[1] https://example.com/action
+
+EOT;
+
+        $service = new HtmlToPlaintextConversionService();
+        $this->assertEquals($expected, $service->setHtml($html)->getPlainText());
+    }
+
     public function testDoLinksNone()
     {
         $expected = <<<EOT
